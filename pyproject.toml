@@ -1,0 +1,13 @@
+[project]
+name = "num-pdes-joe-and-daniel"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "matplotlib>=3.10.8",
+    "numpy>=2.3.5",
+    "scikit-sparse>=0.4.16",
+    "scipy>=1.16.3",
+    "seaborn>=0.13.2",
+]
