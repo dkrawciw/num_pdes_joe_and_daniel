@@ -21,13 +21,12 @@ plt.rcParams.update({
     "legend.fontsize": 12,
 })
 
-
 """Spacial Setup"""
-n = 50
+N = 5
 x_range = (0, 2*np.pi)
 y_range = (0, 2*np.pi)
-x_vals = np.linspace(x_range[0], x_range[1], n,endpoint=False)
-y_vals = np.linspace(y_range[0], y_range[1], n,endpoint=False)
+x_vals = np.linspace(x_range[0], x_range[1], N,endpoint=False)
+y_vals = np.linspace(y_range[0], y_range[1], N,endpoint=False)
 X,Y = np.meshgrid(x_vals,y_vals, indexing='ij')
 h = x_vals[1] - x_vals[0]
 
@@ -35,3 +34,15 @@ h = x_vals[1] - x_vals[0]
 N_t = 100
 t_range = [0, 50]
 dt = (t_range[1] - t_range[0]) / N_t
+
+"""Construct the periodic Laplacian"""
+D = np.zeros((N,N))
+D += np.eye(N, k=0) * -2
+D += np.eye(N, k=1)
+D += np.eye(N, k=-1)
+D[-1,0] = 1
+D[0,-1] = 1
+
+D = csr_matrix(D)
+
+L = kron(eye(N, format="csr"), D, format="csr") + kron(D, eye(N, format="csr"), format="csr")
