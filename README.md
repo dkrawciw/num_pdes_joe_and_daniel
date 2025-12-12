@@ -46,3 +46,11 @@ $$
 \end{equation}
 $$
 where $A$ represents a linear operator and $N(u)$ represents the nonlinear operator.
+
+solved for $u^{n+1}$
+
+$$
+\begin{equation}
+    u^{n+1} = [I-\frac{\Delta t}{2}A]^{-1} ([I+\frac{\Delta t}{2}A] u^n + \frac{3 \Delta t}{2}N(u^n) - \frac{\Delta t}{2}N(u^{n-1}))
+\end{equation}
+$$
