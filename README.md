@@ -39,7 +39,6 @@ $$
 ## Numerical Schemes
 
 The following is CN-AB2 which was given in class. The linear component is Crank Nicolson and the nonlinear part is AB2.
-
 $$
 \begin{equation}
     \frac{u^{n+1} - u^n}{\Delta t} = A\left[ \frac{1}{2} (u^{n+1} + u^n) \right] + \frac{3}{2} N(u^n) - \frac{1}{2} N(u^{n-1})
