@@ -44,7 +44,7 @@ D += np.eye(N, k=1)
 D += np.eye(N, k=-1)
 D[-1,0] = 1
 D[0,-1] = 1
-
+D /= (h**2)
 D = csr_matrix(D)
 
 L = kron(eye(N, format="csr"), D, format="csr") + kron(D, eye(N, format="csr"), format="csr")
@@ -66,25 +66,27 @@ print(np.shape(U[:,:,0].ravel(order="F")))
 u_now = U[:,:,0].ravel(order="F")
 F = f(0)
 f_now = F.ravel(order="F")
-LHS = eye(N**2, format="csr") - dt/2 * L
-RHS = (eye(N**2, format="csr") + dt/2 * L)@u_now + dt*nonlinear_func(u_now) + dt*f_now
-u_then = spsolve(LHS,RHS)
+
+u_then = -1j*dt*(L@u_now + nonlinear_func(u_now) + f_now)
 U[:,:,1] = u_then.reshape((N,N), order="F")
 
+f_prev = f_now
 for k in tqdm(range(1,N_t-1), desc="Evolving SE"):
     u_now = U[:,:,k].ravel(order="F")
     u_prev = U[:,:,k-1].ravel(order="F")
 
     t = k*dt
     F = f(t)
+    
     f_now = F.ravel(order="F")
 
-    LHS = eye(N**2, format="csr") - 1j*dt/2 * L
-    RHS = (eye(N**2, format="csr") + 1j*dt/2 * L)@u_now + 1j*3/2 * dt * nonlinear_func(u_now) - 1j*dt/2 * nonlinear_func(u_prev) + dt*f_now
+    LHS = 1j*eye(N**2, format="csr") - dt/2 * L
+    RHS = 1j*(eye(N**2, format="csr") + dt/2 * L)@u_now + (3/2) * dt * nonlinear_func(u_now) - dt/2 * nonlinear_func(u_prev) + ((dt*3)/2)*f_now - (dt/2)*f_prev
 
     u_then = spsolve(LHS,RHS)
 
     U[:,:,k+1] = u_then.reshape((N,N), order="F")
+    f_prev = f_now
 
 
 """Plotting the first and last solution """
