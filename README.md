@@ -61,4 +61,4 @@ $$
 \end{equation},
 $$
 
-With $u = cos(t)cos(x)sin(y)$ and $f = cos(x)cos(y)(2cos(t)-sin(t))$. We can use this equation with a known solution to test if our code actually converges correctly
+With $u = cos(t)sin(x)sin(y)$ and $f = sin(x)sin(y)(2cos(t)-sin(t))$. We can use this equation with a known solution to test if our code actually converges correctly
