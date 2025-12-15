@@ -23,7 +23,7 @@ plt.rcParams.update({
 })
 
 """Spacial Setup"""
-N = 50
+N = 100
 x_range = (0, 2*np.pi)
 y_range = (0, 2*np.pi)
 x_vals = np.linspace(x_range[0], x_range[1], N,endpoint=False)
@@ -45,7 +45,7 @@ D = csc_matrix(D)
 L = kron(eye(N, format="csc"), D, format="csc") + kron(D, eye(N, format="csc"), format="csc")
 
 """Time Setup"""
-N_t = 1000
+N_t = 2000
 t_range = [0, 1]
 dt = (t_range[1] - t_range[0]) / N_t
 
@@ -74,6 +74,7 @@ for k in tqdm(range(1,N_t-1), desc="Evolving SE", colour="green"):
 
     # u_then = spsolve(LHS,RHS)
     u_then = LHS_lu.solve(RHS)
+    u_then = u_then / np.linalg.norm(u_then)
     # u_then = u_then / np.linalg.norm(u_then)
 
     U[:,:,k+1] = u_then.reshape((N,N), order="F")
@@ -101,4 +102,4 @@ plt.suptitle('Evolution of Schrodinger Equation Through Time', fontsize=18)
 
 plt.tight_layout()
 # plt.savefig("output/problem3.png", dpi=300)
-plt.savefig("output/initial_and_final_SE.svg")
+plt.savefig("output/initial_and_final_periodic_SE.svg")
