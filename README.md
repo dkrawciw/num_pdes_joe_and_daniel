@@ -53,3 +53,12 @@ $$
     u^{n+1} = [I-\frac{\Delta t}{2}A]^{-1} ([I+\frac{\Delta t}{2}A] u^n + \frac{3 \Delta t}{2}N(u^n) - \frac{\Delta t}{2}N(u^{n-1}))
 \end{equation}
 $$
+
+Using method of manufactured solutions, we get a solution to SE of the form 
+$$
+\begin{equation}
+    i u_t = \nabla^2 u + u |u|^2 + f(x,y,t)
+\end{equation},
+$$
+
+With $u = cos(t)cos(x)sin(y)$ and $f = cos(x)cos(y)(2cos(t)-sin(t))$. We can use this equation with a known solution to test if our code actually converges correctly
