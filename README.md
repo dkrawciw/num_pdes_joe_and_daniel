@@ -41,12 +41,12 @@ $$
 The following is CN-AB2 which was given in class. The linear component is Crank Nicolson and the nonlinear part is AB2.
 $$
 \begin{equation}
-    \frac{u^{n+1} - u^n}{\Delta t} = A\left[ \frac{1}{2} (u^{n+1} + u^n) \right] + \frac{3}{2} N(u^n) - \frac{1}{2} N(u^{n-1})
+    i \frac{u^{n+1} - u^n}{\Delta t} = A\left[ \frac{1}{2} (u^{n+1} + u^n) \right] + \frac{3}{2} N(u^n) - \frac{1}{2} N(u^{n-1})
 \end{equation}
 $$
 where $A$ represents a linear operator and $N(u)$ represents the nonlinear operator.
 
-solved for $u^{n+1}$
+<!-- solved for $u^{n+1}$
 
 $$
 \begin{equation}
@@ -61,4 +61,12 @@ $$
 \end{equation},
 $$
 
-With $u = cos(t)sin(x)sin(y)$ and $f = sin(x)sin(y)(2cos(t)-sin(t))$. We can use this equation with a known solution to test if our code actually converges correctly
+With $u = cos(t)sin(x)sin(y)$ and $f = sin(x)sin(y)(2cos(t)-sin(t))$. We can use this equation with a known solution to test if our code actually converges correctly -->
+
+Solving for $u^{n+1}$, we obtain:
+
+$$
+\begin{equation}
+    \left[ I + i \frac{\Delta t}{2} L \right]u^{n+1} = \left[ I - i \frac{\Delta t}{2} L \right] u^n - i \frac{3 \Delta t}{2} N(u^n) + i \frac{\Delta t}{2} N(u^{n-1})
+\end{equation}
+$$
