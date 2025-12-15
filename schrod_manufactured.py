@@ -2,6 +2,7 @@ import numpy as np
 from scipy.sparse import csr_matrix, kron, eye
 from scipy.sparse.linalg import spsolve
 
+
 import matplotlib.pyplot as plt
 import seaborn as sns
 from tqdm import tqdm
@@ -32,7 +33,7 @@ X,Y = np.meshgrid(x_vals,y_vals, indexing='ij')
 h = x_vals[1] - x_vals[0]
 
 """Time Setup"""
-N_t = 10000
+N_t = 5000
 t_range = [0, 1]
 dt = (t_range[1] - t_range[0]) / N_t
 
@@ -48,7 +49,7 @@ D = csr_matrix(D)
 
 L = kron(eye(N, format="csr"), D, format="csr") + kron(D, eye(N, format="csr"), format="csr")
 
-nonlinear_func = lambda u: u * np.linalg.norm(u)**2
+nonlinear_func = lambda u: np.multiply(u,np.multiply(u,np.conjugate(u)))
 
 
 """Creating the solution array"""
@@ -56,7 +57,7 @@ U = np.zeros((N,N,N_t), dtype=complex)
 # U[0,N//2,0] = 1
 U[:,:,0] = np.multiply(np.sin(X),np.sin(Y))
 """since f is separable in relevent cases, can make a function of t"""
-f = lambda t: np.multiply(np.sin(X),np.sin(Y))*(2*np.cos(t)-1j*np.sin(t))
+f = lambda t: -1j*np.sin(t)*np.sin(X)*np.sin(Y) - 2*np.cos(t)*np.sin(X)*np.sin(Y) + pow(np.cos(t),3)*pow(np.sin(X),3)*pow(np.sin(Y),3)
 print(np.shape(f(0).ravel(order="F")))
 print(np.shape(U[:,:,0].ravel(order="F")))
 
