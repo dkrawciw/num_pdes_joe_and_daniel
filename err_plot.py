@@ -114,29 +114,29 @@ plt.legend()
 plt.tight_layout()
 plt.savefig("output/error_convergence.svg")
 
-plt.clf()
+# plt.clf()
 
-""" Plotting the Actual and Numerical """
-fig, ax = plt.subplots(1, 2, figsize=(12, 5))
+# """ Plotting the Actual and Numerical """
+# fig, ax = plt.subplots(1, 2, figsize=(12, 5))
 
-# Actual Solution Plot
-U_real = exact_soln_func(X,Y,t_range[1])
-c1 = ax[0].contourf(X, Y, np.abs(U_real), levels=50, cmap='viridis')
-fig.colorbar(c1, ax=ax[0], label=r'$u(x,y)$')
-ax[0].set_xlabel(r'$x$')
-ax[0].set_ylabel(r'$y$')
-ax[0].set_title('Actual Solution', fontsize=16)
+# # Actual Solution Plot
+# U_real = exact_soln_func(X,Y,t_range[1])
+# c1 = ax[0].contourf(X, Y, np.abs(U_real), levels=50, cmap='viridis')
+# fig.colorbar(c1, ax=ax[0], label=r'$u(x,y)$')
+# ax[0].set_xlabel(r'$x$')
+# ax[0].set_ylabel(r'$y$')
+# ax[0].set_title('Actual Solution', fontsize=16)
 
-# Final Condition Plot
-U_final_squared = np.abs(U[:,:,-1].reshape((N,N), order="F"))
-c2 = ax[1].contourf(X, Y, U_final_squared, levels=50, cmap='viridis')
-fig.colorbar(c2, ax=ax[1], label=r'$u(x,y)$')
-ax[1].set_xlabel(r'$x$')
-ax[1].set_ylabel(r'$y$')
-ax[1].set_title('Numerical Solution', fontsize=16)
+# # Final Condition Plot
+# U_final_squared = np.abs(U[:,:,-1].reshape((N,N), order="F"))
+# c2 = ax[1].contourf(X, Y, U_final_squared, levels=50, cmap='viridis')
+# fig.colorbar(c2, ax=ax[1], label=r'$u(x,y)$')
+# ax[1].set_xlabel(r'$x$')
+# ax[1].set_ylabel(r'$y$')
+# ax[1].set_title('Numerical Solution', fontsize=16)
 
-plt.suptitle('Evolution of Schrodinger Equation Through Time', fontsize=18)
+# plt.suptitle('Evolution of Schrodinger Equation Through Time', fontsize=18)
 
-plt.tight_layout()
-# plt.savefig("output/problem3.png", dpi=300)
-plt.savefig("output/Method_of_Manufactured_Solution_comparison.svg")
+# plt.tight_layout()
+# # plt.savefig("output/problem3.png", dpi=300)
+# plt.savefig("output/Method_of_Manufactured_Solution_comparison.svg")
